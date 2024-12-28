@@ -14,13 +14,13 @@ bool is_negative;
 
 `value` is a vector type of data used to store each digit of an arbitrary-precision integer. each element in `value` represents a numeric digit, stored in order from lowest to highest digit. For example, the number 12345 will be stored as value = {5, 4, 3, 2, 1}.
 
-`is_negative` is a bool type of data used to store the positivity or negativity of an arbitrary-precision integer. If this integer is positive, `is_negative` will be false; otherwise, if this integer is negative, `is_nagative` will be true.
+`is_negative` is a bool type of data used to store the positivity or negativity of an arbitrary-precision integer. If this integer is positive, `is_negative` will be false; otherwise, if this integer is negative, `is_negative` will be true.
 
 ---
 
 ### **Constructors**
 1. **A Default Constructor**
-This default constructor is used to initialize a `bigint` object with a value of `0`. In math, `0` is considered a neutral number, it is neither positive nor negative. For bigint, when the value is `0`, is_negative will be positive
+This default constructor is used to initialize a `bigint` object with a value of `0`. In math, `0` is considered a neutral number, it is neither positive nor negative. For bigint, when the value is `0`, is_negative will be false.
     ```cpp
     test = bigint();
     std::cout << test;
@@ -29,7 +29,7 @@ This default constructor is used to initialize a `bigint` object with a value of
 2. **A constructor that takes a signed 64-bit integer and converts it to an arbitrary-precision integer**
 This constructor is used to initialize a `bigint` object with an `int64_t` type of data. 
     ```cpp
-    int64_t num = -562
+    int64_t num = -562;
     test = bigint(num);
     std::cout << test;
     // test.is_negative = true;
@@ -289,7 +289,7 @@ If the bigint object is negative, we first insert a minus sign to indicate that 
 
 ```cpp
     std::string str1 = "123";
-    std::string str1 = "-123";
+    std::string str2 = "-123";
     test1 = bigint(str1); 
     test2 = bigint(str2); 
     cout << test1 << "\n";     // The output will be: 123
