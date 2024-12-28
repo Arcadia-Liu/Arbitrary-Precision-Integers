@@ -12,9 +12,9 @@ std::vector<int64_t> value;
 bool is_negative;
 ```
 
-`value` is a vector type of data used to store each digit of a arbitrary-precision integer. each element in `value` represents a numeric digit, stored in order from lowest to highest digit. For example, the number 12345 will be stored as value = {5, 4, 3, 2, 1}.
+`value` is a vector type of data used to store each digit of an arbitrary-precision integer. each element in `value` represents a numeric digit, stored in order from lowest to highest digit. For example, the number 12345 will be stored as value = {5, 4, 3, 2, 1}.
 
-`is_negative` is a bool type of data used to store the positivity or negativity of a arbitrary-precision integer. If this integer is positive, `is_negative` will be false; otherwise, if this integer is negative, `is_nagative` will be true.
+`is_negative` is a bool type of data used to store the positivity or negativity of an arbitrary-precision integer. If this integer is positive, `is_negative` will be false; otherwise, if this integer is negative, `is_nagative` will be true.
 
 ---
 
@@ -34,10 +34,10 @@ This constructor is used to initialize a `bigint` object with an `int64_t` type 
     std::cout << test;
     // test.is_negative = true;
     // test.value = {2, 6, 5};
-    // the output will be -562.
+    // The output will be -562.
     ```
 3. **A constructor that takes a string of digits and converts it to an arbitrary-precision integer**
-This constructor is used to converts a `string` representing an integer into a `bigint` object by first checking the string for empty and illegal characters, then determining whether the first character is a sign (+ or -) to set the sign flag. Next, we check the following parts bit-by-bit if the portion of the string after the sign or the entire string (in no sign situation) is a number. Then we store it in the `bigint.value` from the lowest to the highest digit. Finally, we remove invalid leading zeros.
+This constructor is used to convert a `string` representing an integer into a `bigint` object by first checking the string for empty and illegal characters, then determining whether the first character is a sign (+ or -) to set the sign flag. Next, we check the following parts bit-by-bit if the portion of the string after the sign or the entire string (in no sign situation) is a number. Then we store it in the `bigint.value` from the lowest to the highest digit. Finally, we remove invalid leading zeros.
     ```cpp
     std::string str1 = "+46543";
     std::string str2 = "-86564";
@@ -90,7 +90,7 @@ This constructor is used to converts a `string` representing an integer into a `
     
     This method implements the subtraction operation for two bigint objects.
 
-    When the two subtracted numbers are of the same sign, we start by comparing two numbers. If the two numbers are equal, then we directly set the result as `0`. Otherwise, the method compares the length of the two numbers to determine which is longer. The subtraction is performed by iterating over the digits of the longer number and subtracting the corresponding digits of the smaller number, starting from the lower digit. Borrowing is handled where necessary: if the subtraction of a digit results in a negative value, we add `10` to the current digit, and a `borrow = 1` is propagated to the next higher digit. The result's sign will be same as the two subtracted numbers. After the calculation, leading zeros in the result are removed to maintain a consistent representation.
+    When the two subtracted numbers are of the same sign, we start by comparing two numbers. If the two numbers are equal, then we directly set the result as `0`. Otherwise, the method compares the length of the two numbers to determine which is longer. The subtraction is performed by iterating over the digits of the longer number and subtracting the corresponding digits of the smaller number, starting from the lower digit. Borrowing is handled where necessary: if the subtraction of a digit results in a negative value, we add `10` to the current digit, and a `borrow = 1` is propagated to the next higher digit. The result's sign will be the same as the two subtracted numbers. After the calculation, leading zeros in the result are removed to maintain a consistent representation.
 
     If the two numbers are of different signs, we can convert the subtraction to an addition operation.
 
@@ -119,9 +119,9 @@ This constructor is used to converts a `string` representing an integer into a `
 5. **Multiply Operator**
     This method implements the `*` operator for the `bigint` class, enabling the multiplication of two `bigint` objects and returning the resulting product.
 
-    When the two subtracted numbers are of the same sign, the result will be positive. When the two subtracted numbers are of the different sign, the result will be negative.
+    When the two subtracted numbers are of the same sign, the result will be positive. When the two subtracted numbers are of different signs, the result will be negative.
 
-    When calculating, each digit of the left hand side number `value[i]` is multiplied by every digit of the rigth hand side number `rhs.value[j]`, starting from the least significant digit. For every such multiplication, the partial product is added to the corresponding position in the `product.value` array, accounting for the positional offset `(i + j)`. If there is a carry generated during this step, it is propagated to the next higher position. Finally, we remove the leading zeros in result to make sure the format correct.
+    When calculating, each digit of the left-hand side number `value[i]` is multiplied by every digit of the right-hand side number `rhs.value[j]`, starting from the least significant digit. For every such multiplication, the partial product is added to the corresponding position in the `product.value` array, accounting for the positional offset `(i + j)`. If there is a carry generated during this step, it is propagated to the next higher position. Finally, we remove the leading zeros in the result to make sure the format is correct.
 
 
     ```cpp
@@ -162,7 +162,7 @@ This constructor is used to converts a `string` representing an integer into a `
 1. **Equality and Inequality Operator**
     The equality method implements the `==` operator for the `bigint` class, which compares two `bigint` objects and returns `true` if they are equal and `false` otherwise.
 
-    Firstly, we check if the signs of the two bigint objects are the same. If `is_negative` of the left hand side object is different from `is_negative` of the right hand side object, the method returns `false`, indicating the objects are not equal.
+    Firstly, we check if the signs of the two bigint objects are the same. If `is_negative` of the left-hand side object is different from `is_negative` of the right hand side object, the method returns `false`, indicating the objects are not equal.
 
     Then we check if the number of digits of the two `bigint` objects are equal. If the sizes are different, the method returns false, as objects with different numbers of digits cannot be equal.
 
@@ -188,15 +188,15 @@ This constructor is used to converts a `string` representing an integer into a `
 
 2. **Less Than Operator, Less Than and Equal to Operator**
 
-    Less than operation method implements the `<` operator for the `bigint` class, which compares whether one `bigint` is smaller than another. If the left hand side number is less than the right side number, then it will return `true`. If same or larger, then it will return `false`.
+    The less than operation method implements the `<` operator for the `bigint` class, which compares whether one `bigint` is smaller than another. If the left-hand side number is less than the right-side number, then it will return `true`. If the same or larger, then it will return `false`.
 
-    First, we compare the `is_negative` flags of both bigint objects. If the signs are different, then we immediately returns whether the left hand side object is negative. If `*this` is negative, it is smaller than any positive number at the rigth hand side.
+    First, we compare the `is_negative` flags of both bigint objects. If the signs are different, then we immediately returns whether the left-hand side object is negative. If `*this` is negative, it is smaller than any positive number at the right hand side.
 
     If the signs are the same, then we compares the sizes of the value vectors of these two `bigint` numbers. If these two numbers are positive, then the smaller vector size indicates a smaller number. If these two `bigint` numbers are negative, the result is reversed because a larger number with more digits is actually smaller in the negative number space.
 
     If both the size and signs match, then we compare the digits of both `bigint` objects starting from the higher digit to the lower. The digits are compared one by one, considering the sign.
 
-    For less than and equal to operation, we check if the left hand side bigint object satisfies the less than or equal to operation. If so, it returns true. If not satisfies, then it returns false.
+    For less than and equal to operation, we check if the left-hand side bigint object satisfies the less than or equal to operation. If so, it returns true. If not satisfied, then it returns false.
 
     ```cpp
     std::cout << std::boolalpha;
@@ -214,9 +214,9 @@ This constructor is used to converts a `string` representing an integer into a `
 
 3. **Greater Than Operator, Greater Than and Equal to Operator**
 
-    Greater than operation method implements the `>` operator for the `bigint` class, which compares whether one `bigint` is greater than another. It is the opposite of less than and equal to operation.
+    The greater than operation method implements the `>` operator for the `bigint` class, which compares whether one `bigint` is greater than another. It is the opposite of less than and equal to operation.
 
-    For greater than and equal to operation, we check if the left hand side bigint object satisfies the greater than or equal to operation. If so, it returns true. If not satisfies, then it returns false.
+    For greater than and equal to operation, we check if the left-hand side bigint object satisfies the greater than or equal to operation. If so, it returns true. If not satisfied, then it returns false.
 
      ```cpp
     std::cout << std::boolalpha;
@@ -235,7 +235,7 @@ This constructor is used to converts a `string` representing an integer into a `
 ### **Self-Addictive and Self-Decreasing Operator**
 1. Prefix Increment Operator
 
-    The prefix increment operator `++` is used to increment the `bigint` object by 1. We implement this by creating a bigint number, with is_negative = false and value = {1}. We add the created bigint object to the original one, and then returns the updated bigint.
+    The prefix increment operator `++` is used to increment the `bigint` object by 1. We implement this by creating a bigint number, with is_negative = false and value = {1}. We add the created bigint object to the original one, and then return the updated bigint.
     
     ```cpp
     std::string str1 = "233";
@@ -247,7 +247,7 @@ This constructor is used to converts a `string` representing an integer into a `
 
 2. Postfix Increment Operator
 
-    The postfix increment operator `++` is used to increment the `bigint` object by 1, but it returns the object before the increment. We implement this by first storing the original bigint object. Then we use prefix increment operator to add 1 to the original bigint object, but then returns the bigint before updated.
+    The postfix increment operator `++` is used to increment the `bigint` object by 1, but it returns the object before the increment. We implement this by first storing the original bigint object. Then we use the prefix increment operator to add 1 to the original bigint object, but then returns the bigint before updating.
     
     ```cpp
     std::string str1 = "233";
@@ -259,7 +259,7 @@ This constructor is used to converts a `string` representing an integer into a `
 
 3. Prefix Decreasing Operator
 
-    The prefix decreasing operator `--` is used to decrease the `bigint` object by 1. We implement this by creating a bigint number, with is_negative = true and value = {1}. We add the created bigint object to the original one, and then returns the updated bigint.
+    The prefix decreasing operator `--` is used to decrease the `bigint` object by 1. We implement this by creating a bigint number, with is_negative = true and value = {1}. We add the created bigint object to the original one, and then return the updated bigint.
     
     ```cpp
     std::string str1 = "233";
@@ -271,7 +271,7 @@ This constructor is used to converts a `string` representing an integer into a `
 
 4. Postfix Decreasing Operator
 
-    The postfix decreasing operator `--` is used to decreasing the `bigint` object by 1, but it returns the object before the decreasing. We implement this by first storing the original bigint object. Then we use prefix decreasing operator to add -1 to the original bigint object, but then returns the bigint before updated.
+    The postfix decreasing operator `--` is used to decreasing the `bigint` object by 1, but it returns the object before the decreasing. We implement this by first storing the original bigint object. Then we use the prefix decreasing operator to add -1 to the original bigint object, but then returns the bigint before updating.
     
     ```cpp
     std::string str1 = "233";
